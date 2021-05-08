@@ -41,7 +41,26 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // dagger
+    final daggerVersion = '2.35.1'
+    [
+            "com.google.dagger:dagger:$daggerVersion",
+            "com.google.dagger:dagger-compiler:$daggerVersion"
+    ].each {
+        annotationProcessor(it)
+        testAnnotationProcessor(it)
+    }
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // retrofit
+    final retrofitVersion = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 }
