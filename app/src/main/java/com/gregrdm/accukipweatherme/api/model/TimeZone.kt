@@ -6,7 +6,7 @@ data class TimeZone(
     @SerializedName("Code")
     val code: String,
     @SerializedName("GmtOffset")
-    val gmtOffset: Int,
+    val gmtOffset: Float,
     @SerializedName("IsDaylightSaving")
     val isDaylightSaving: Boolean,
     @SerializedName("Name")

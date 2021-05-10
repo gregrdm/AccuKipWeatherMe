@@ -2,6 +2,7 @@ package com.gregrdm.accukipweatherme.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -18,6 +19,7 @@ object ServiceBuilder {
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .client(okHttpClient)
 
     private val retrofit = retrofitBuilder.build()

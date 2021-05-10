@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AccuKipWeatherMe</string>
     <string name="input_city">Wprowadź miasto</string>
+
+
+    <!--  IMAGE DESCRIPTIONS  -->
+    <string name="content_description_arrow_pointed_right">Arrow right</string>
+    <string name="infoMessage">Użyj poniższego pola aby wyszukać miasto</string>
+    <!-- /IMAGE DESCRIPTIONS   -->
 </resources>
