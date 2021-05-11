@@ -59,16 +59,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.3'
     implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.0'
 
-    // dagger
-    final daggerVersion = '2.35.1'
-    [
-            "com.google.dagger:dagger:$daggerVersion",
-            "com.google.dagger:dagger-compiler:$daggerVersion"
-    ].each {
-        annotationProcessor(it)
-        testAnnotationProcessor(it)
-    }
-
     // gson
     implementation 'com.google.code.gson:gson:2.8.6'
 

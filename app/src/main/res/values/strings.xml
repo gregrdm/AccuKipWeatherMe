@@ -6,5 +6,6 @@
     <!--  IMAGE DESCRIPTIONS  -->
     <string name="content_description_arrow_pointed_right">Arrow right</string>
     <string name="infoMessage">Użyj poniższego pola aby wyszukać miasto</string>
+    <string name="weather_icon_description">Weather Icon</string>
     <!-- /IMAGE DESCRIPTIONS   -->
 </resources>
