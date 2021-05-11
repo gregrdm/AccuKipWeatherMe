@@ -10,7 +10,7 @@ import com.gregrdm.accukipweatherme.databinding.ListWeatherCityItemBinding
 
 class CityListRecyclerViewAdapter : ListAdapter<City, RecyclerView.ViewHolder>(DIFFER) {
 
-    var onItemClick: (City) -> Unit = {}
+    var onItemClick: ((City) -> Unit) = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CityViewHolder.newInstance(parent)
@@ -21,7 +21,7 @@ class CityListRecyclerViewAdapter : ListAdapter<City, RecyclerView.ViewHolder>(D
     }
 
     private fun bindCityItem(holder: CityViewHolder, position: Int) {
-        val item = getItem(position)
+        val item = getItem(position) as City
         with (holder.viewBinding) {
             cityName = item.localizedName
             cityDetails = "${item.region.englishName}, ${item.country.englishName}"

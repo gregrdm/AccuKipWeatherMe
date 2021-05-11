@@ -1,11 +1,13 @@
 package com.gregrdm.accukipweatherme.ui.main
 
+import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gregrdm.accukipweatherme.api.AcuWeatherService
 import com.gregrdm.accukipweatherme.api.ServiceBuilder
 import com.gregrdm.accukipweatherme.api.model.City
+import com.gregrdm.accukipweatherme.ui.utils.matchesWithMyRegex
 import com.jakewharton.rxrelay3.PublishRelay
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.annotations.NonNull
@@ -21,19 +23,26 @@ class MainViewModel : ViewModel() {
 
     private val autoCompletePublishSubject = PublishRelay.create<String>()
 
+    lateinit var inputText: String
+
     init {
         setupAutoComplete()
     }
 
-    fun fetchCities(input: String?) {
-        if (input != null) autoCompletePublishSubject.accept(input.trim())
+    fun fetchCities(input: String) {
+        if (matchesWithMyRegex(input)) {
+            autoCompletePublishSubject.accept(input.trim())
+            inputText = input.trim()
+        } else if (input.isNotEmpty()) {
+            mutableScreenState.postValue(ScreenState.ShowError("Unsupported City name, use ENGLISH names."))
+        }
     }
 
     private fun setupAutoComplete() = autoCompletePublishSubject
         .debounce(300, TimeUnit.MILLISECONDS)
         .distinctUntilChanged()
-        .filter { it.length > 5 } // todo: remove or decrease length after development
-        .switchMap { getCities(it.toString()) }
+        .filter { it.length >= 3 }
+        .switchMap { getCities(it) }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(
@@ -45,16 +54,13 @@ class MainViewModel : ViewModel() {
         .searchCities(query = query, offset = 15)
         .flatMapIterable { it }
         .toList()
-        .onErrorReturn { emptyList() }
+        .doOnError {
+            mutableScreenState.postValue(ScreenState.ShowError(it?.localizedMessage!!))
+        }
         .toObservable()
-
-    fun onCityItemClicked() {
-
-    }
 
     sealed class ScreenState {
         class ShowData(val data: List<City>) : ScreenState()
         class ShowError(val errorMessage: String) : ScreenState()
-        object NoData : ScreenState()
     }
 }

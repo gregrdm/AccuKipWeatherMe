@@ -22,11 +22,15 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/margin_32"
+            android:layout_marginBottom="@dimen/margin_24"
             android:text="@string/infoMessage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/inputCityName"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,13 +39,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
+            android:layout_margin="@dimen/margin_24"
             android:hint="@string/input_city"
             app:endIconMode="clear_text"
             app:layout_constraintTop_toBottomOf="@id/message"
+            app:layout_constraintBottom_toTopOf="@id/cityRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -50,7 +54,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/languagesRecyclerView"
+            android:id="@+id/cityRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="visible"
@@ -62,6 +66,17 @@
             app:layout_constraintTop_toBottomOf="@id/inputCityName"
             tools:itemCount="2"
             tools:listitem="@layout/list_weather_city_item"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="@dimen/margin_32"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/inputCityName"
+            app:layout_constraintStart_toStartOf="@id/inputCityName"
+            app:layout_constraintTop_toBottomOf="@id/inputCityName"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
